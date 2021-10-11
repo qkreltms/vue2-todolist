@@ -30,7 +30,7 @@ module.exports = {
       js: 'never',
       vue: 'never'
     }],
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": "off",
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions
     'no-param-reassign': ['error', {
@@ -38,7 +38,8 @@ module.exports = {
       ignorePropertyModificationsFor: [
         'state', // for vuex state
         'acc', // for reduce accumulators
-        'e' // for e.returnvalue
+        'e', // for e.returnvalue,
+        'event'
       ]
     }],
     // allow optionalDependencies

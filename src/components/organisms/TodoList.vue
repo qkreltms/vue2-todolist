@@ -1,32 +1,46 @@
 <template>
+<div>
 <header>
     <h1>Vue Todo List</h1>
+    <label-input :text="'할 일을 입력하세요.'" :onPressEnterKey="onPressEnterKey"/>
 </header>
     <ul>
-        <todo-item v-for="props.todos" v-bind:key="props.todos.id"  />
+      <li v-for="todo in todos" :key="todo.id">
+        <todo-item :todo="todo"   />
+        </li>
     </ul>
+    </div>
 </template>
 <script>
-import { defineComponent } from '@vue/composition-api';
-import ButtonA from '../atoms/ButtonA.vue';
-import TodoItem from '../molecules/TodoItem.vue';
+import ButtonA from '../atoms/ButtonA';
+import LabelInput from '../molecules/LabelInput';
+import TodoItem from '../molecules/TodoItem';
 
-export default defineComponent({
+export default {
   setup() {},
   components: {
-      TodoItem,
-    ButtonA
-}
+    TodoItem,
+    ButtonA,
+    LabelInput,
+  },
   props: {
     todos: {
       type: Array,
-      default: [],
+      default: () => [],
+    },
+    addTodo: {
+      type: Function,
+      deafult: () => undefined,
     },
   },
   methods: {
-      onClickDeleteTodo: function() {},
-      onClickEditTodo: function() {},
+    onClickDeleteTodo() {},
+    onClickEditTodo() {},
+    onPressEnterKey(event) {
+      const text = event.target.value;
+      this.addTodo(text);
+    },
   },
-});
+};
 </script>
 <style scoped></style>

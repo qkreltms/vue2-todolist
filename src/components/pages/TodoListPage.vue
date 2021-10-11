@@ -1,17 +1,26 @@
 <template>
-    <todo-list :todos="todos" />
+    <todo-list :todos="todos" :addTodo="addTodo" />
 </template>
 <script>
-import { defineComponent } from '@vue/composition-api'
+import TodoList from '../organisms/TodoList';
 
-export default defineComponent({
-    setup() {
-        
+export default {
+  components: { TodoList },
+  setup() {
+
+  },
+  data() {
+    return {
+      todos: [{ text: '입력하세요...', isDeleted: false, isCompleted: false }],
+    };
+  },
+  methods: {
+    addTodo(text) {
+      const newTodo = { text, isDeleted: false, isCompleted: false };
+      this.todos = [...this.todos, newTodo];
     },
-    data: function () {
-        todos: [{ todoText: '입력하세요...', isDeleted: false, isCompleted: false }]
-    }
-})
+  },
+};
 </script>
 <style scoped>
 

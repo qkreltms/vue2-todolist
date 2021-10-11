@@ -1,19 +1,25 @@
 <template>
-  <li class="todoItemList">
-    <p>{{ props.todoText }}</p>
+  <div
+    v-if="!todo.isDeleted"
+    class="todoItemList"
+    :class="{ completed: todo.isCompleted }"
+  >
+    <p>{{ todo.text }}</p>
     <button-a :click="onClickEditTodoHandler">수정</button-a>
     <button-a :click="onClickDeleteTodoHandler">삭제</button-a>
-  </li>
+  </div>
 </template>
 <script>
-import { defineComponent } from '@vue/composition-api';
-import ButtonA from '../atoms/ButtonA.vue';
+import ButtonA from '../atoms/ButtonA';
 
-export default defineComponent({
+export default {
   components: { ButtonA },
   setup() {},
   props: {
-    todoText: { type: String, default: '' },
+    todo: {
+      type: Object,
+      default: () => ({ text: '', isDeleted: false, isCompleted: false }),
+    },
     onClickEditTodo: { type: Function, default: () => undefined },
     onClickDeleteTodo: { type: Function, default: () => undefined },
   },
@@ -25,6 +31,6 @@ export default defineComponent({
       this.onClickDeleteTodo(event);
     },
   },
-});
+};
 </script>
 <style scoped></style>

@@ -4,11 +4,9 @@
     </button>
 </template>
 <script>
-import { defineComponent } from '@vue/composition-api';
-
-export default defineComponent({
+export default {
   setup() {
 
   },
-});
+};
 </script>
